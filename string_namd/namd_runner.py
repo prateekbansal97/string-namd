@@ -5,7 +5,7 @@ Handles preparation and launching of NAMD jobs based on rendered templates.
 
 import subprocess
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
 
 
 class NamdRunner:
@@ -65,7 +65,7 @@ class NamdRunner:
 
     def run_parallel(
         self,
-        config_paths: list[Path],
+        config_paths: List[Path],
         max_workers: int = 4,
     ) -> None:
         """

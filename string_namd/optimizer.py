@@ -114,12 +114,18 @@ class StringOptimizer:
         new_coords = []
         for img in range(self.config.num_images):
             trajs = list(iter_dir.glob(f"swarm_img{img}_rep*_traj.dcd"))
-            # TODO: integrate with MDTraj/MDAnalysis to extract final coords
             rep_coords = [self._extract_coords(p) for p in trajs]
-            new_coords.append(np.mean(rep_coords, axis=0))
+            if rep_coords:
+                mean_coords = np.mean(rep_coords, axis=0)
+            else:
+                mean_coords = np.full(3, np.nan)
+            new_coords.append(mean_coords)
+
         self._coords = np.vstack(new_coords)
+        output_path = self.runner.output_dir / f"iter{iteration:03d}" / "string_coords.txt"
+        output_path.parent.mkdir(parents=True, exist_ok=True)
         np.savetxt(
-            iter_dir / "string_coords.txt",
+            output_path,
             self._coords,
             header="x y z",
         )

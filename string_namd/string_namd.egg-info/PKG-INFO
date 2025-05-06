@@ -9,18 +9,16 @@ Classifier: Development Status :: 3 - Alpha
 Classifier: Intended Audience :: Science/Research
 Classifier: Topic :: Scientific/Engineering :: Chemistry
 Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
 Classifier: Programming Language :: Python :: 3.8
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
-Requires-Python: >=3.8
+Requires-Python: >=3.7
 Description-Content-Type: text/markdown
 Provides-Extra: dev
 
 # string-namd
 
-[![PyPI version](https://img.shields.io/pypi/v/string-namd)]()
-[![Python version](https://img.shields.io/pypi/pyversions/string-namd)]()
-[![License](https://img.shields.io/github/license/yourusername/string-namd)]()
 
 A modular, class-based Python package to run the string method with swarm-of-trajectories in NAMD. Designed for newcomers: configure via a single YAML/JSON file, render NAMD/Colvars templates automatically, dispatch equilibration and swarm jobs, and update the string iteratively.
 
@@ -33,10 +31,6 @@ A modular, class-based Python package to run the string method with swarm-of-tra
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Example Configuration](#example-configuration)
-- [Project Structure](#project-structure)
-- [Testing](#testing)
-- [Development](#development)
-- [License](#license)
 
 ## Overview
 
@@ -116,11 +110,9 @@ This will:
 
 2.    For each iteration:
 
-  -      Render and launch equilibration jobs for each image.
-
--        Render and launch swarm jobs for each image.
-
- -       Post-process swarm outputs to update image coordinates.
+- Render and launch equilibration jobs for each image.
+- Render and launch swarm jobs for each image.
+- Post-process swarm outputs to update image coordinates.
 
 3. Save updated coordinates and log files under `output_dir/iter{n}`.
 

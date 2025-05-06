@@ -79,11 +79,19 @@ def test_update_string_writes_file(tmp_path):
     """
     # Prepare fake iteration directory and dummy traj files
     iter_dir = tmp_path / "iter001"
-    iter_dir.mkdir()
+    iter_dir.mkdir(parents=True, exist_ok = True)
+    tpl_dir = tmp_path / "templates"
+    tpl_dir.mkdir()
+    (tpl_dir / "colvars.template").write_text("")
+    (tpl_dir / "namd.template").write_text("")
     # Create dummy trajectory files
-    for rep in range(DummyConfig.num_swarms):
-        f = iter_dir / f"swarm_img0_rep{rep}_traj.dcd"
-        f.write_text("")
+    for img in range(DummyConfig.num_images):
+        for rep in range(DummyConfig.num_swarms):
+            f = iter_dir / f"swarm_img{img}_rep{rep}_traj.dcd"
+            f.write_text("")
+    #for rep in range(DummyConfig.num_swarms):
+    #    f = iter_dir / f"swarm_img0_rep{rep}_traj.dcd"
+    #    f.write_text("")
 
     # Subclass optimizer to override extraction logic
     class TestOptimizer(StringOptimizer):
@@ -102,9 +110,9 @@ def test_update_string_writes_file(tmp_path):
     optimizer._coords = np.zeros((DummyConfig.num_images, 3))
     optimizer._update_string(iteration=1)
 
-    coords_file = iter_dir / "string_coords.txt"
+    coords_file = tmp_path / "iter001" / "string_coords.txt"
     assert coords_file.exists()
     data = np.loadtxt(coords_file)
-    # Average of 0,1,2 is 1
-    assert np.allclose(data, [1.0, 1.0, 1.0])
-
+    assert data.shape == (2, 3)
+    assert np.allclose(data[0], [1.0, 1.0, 1.0])
+    assert np.allclose(data[1], [1.0, 1.0, 1.0])
