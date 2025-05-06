@@ -1,8 +1,5 @@
 # string-namd
 
-[![PyPI version](https://img.shields.io/pypi/v/string-namd)]()
-[![Python version](https://img.shields.io/pypi/pyversions/string-namd)]()
-[![License](https://img.shields.io/github/license/yourusername/string-namd)]()
 
 A modular, class-based Python package to run the string method with swarm-of-trajectories in NAMD. Designed for newcomers: configure via a single YAML/JSON file, render NAMD/Colvars templates automatically, dispatch equilibration and swarm jobs, and update the string iteratively.
 
