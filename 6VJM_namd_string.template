@@ -1,0 +1,76 @@
+# shared simulation options for replica exchange
+
+timestep	1.0
+#temperature     310
+structure       $psf_file 
+coordinates     $coord_file
+
+#step5_input_namd.psf	
+#coordinates     6VJM_APO_HMass_NPT_formatted.pdb 
+bincoordinates  $bincoord_fname
+extendedSystem  $xsc_fname
+$vel_line
+margin		2.0
+stepspercycle	10
+paraTypeCharmm	on
+#parameters	par_all22_prot.prm
+#parameters /home/prateek/storage/toppar_c36_jul20/par_all36_na.prm
+#parameters /home/prateek/storage/toppar_c36_jul20/par_all36_carb.prm
+#parameters /home/prateek/storage/toppar_c36_jul20/par_all36_cgenff.prm
+#parameters /home/prateek/storage/toppar_c36_jul20/par_all36_lipid.prm 
+#parameters /home/prateek/storage/ClassC/StringMethod/Inac_Int1/Initial_Path/toppar_particular/par_all36m_prot.prm
+#parameters /home/prateek/storage/ClassC/StringMethod/Inac_Int1/Initial_Path/toppar_particular/toppar_all36_carb_glycolipid.str
+#parameters /home/prateek/storage/ClassC/StringMethod/Inac_Int1/Initial_Path/toppar_particular/toppar_all36_lipid_cholesterol.str
+#parameters /home/prateek/storage/ClassC/StringMethod/Inac_Int1/Initial_Path/toppar_particular/toppar_all36_lipid_sphingo.str
+#parameters /home/prateek/storage/ClassC/StringMethod/Inac_Int1/Initial_Path/toppar_particular/toppar_water_ions.str
+$parameters
+langevin    on
+langevinDamping 2.8284
+langevinTemp    310
+
+#cellBasisVector1   128.842129   0.0         0.0       
+#cellBasisVector2     0.0       128.842129   0.0
+#cellBasisVector3     0.0         0.0       190.944000
+#cellOrigin          0.0   0.0    0.0
+#cellOrigin        64.4210645  64.4210645  95.472000
+wrapAll on          ;# optional, keeps coords inside the box
+wrapWater on
+WrapNearest      on       ;# keeps lipids/waters near the protein
+
+if {1} {
+useGroupPressure      yes ;# needed for 2fs steps
+useFlexibleCell       yes  ;# no for water box, yes for membrane
+useConstantArea       yes  ;# no for water box, yes for membrane
+
+langevinPiston        on
+langevinPistonTarget  1.01325 ;#  in bar -> 1 atm
+langevinPistonPeriod  200.
+langevinPistonDecay   50.
+langevinPistonTemp    310 
+}
+
+PME            yes
+PMEGridSpacing 1.0  ;# or explicit PMEGridSizeX/Y/Z
+switchdist 10
+cutoff     12
+pairlistdist 14
+exclude		scaled1-4
+1-4scaling	0.4
+switching 	on
+
+colvars         on 
+colvarsConfig	$colvars_fname
+
+outputname	$output_fname
+outputEnergies  500	
+run             $nsteps 
+
+#for { set i 1 } { $i <= $num_stages } { incr i } {
+#	set current_force_k [expr $swarms_force_constant / $num_stages * $i#]
+#	#foreach bias {"CA_RMSD"} 
+#        #{	
+#	#    colvarbias changeconfig $bias "forceConstant $current_force_k"
+#	#}
+#	colvarbias changeconfig "CA_RMSD_BIAS" "forceConstant $current_force_k"
+#    minimize	$num_steps
+#}

@@ -1,0 +1,720 @@
+colvarsTrajFrequency   $trajfreq 
+
+units real
+
+colvar {
+    name CA_RMSD
+
+    # Insert one or several components below (see templates/components)
+
+    rmsd {
+        atoms {
+            psfSegID PROA PROB
+            atomNameResidueRange CA 1-697
+            atomNameResidueRange CA 698-1395 
+        }
+        refPositionsFile $reffile 
+    }
+}
+
+harmonic {
+    name CA_RMSD_BIAS
+    colvars CA_RMSD
+    forceConstant $bias_CA_RMSD_K
+    centers $bias_CA_RMSD_CENTER
+}
+
+colvar {
+    name CV1_distance 
+    distance {
+        group1 {
+            psfSegID PROA PROA
+            atomNameResidueRange CA 57-70
+            atomNameResidueRange CA 82-94
+             }
+        group2 {
+            psfSegID PROA PROA
+            atomNameResidueRange CA 183-193
+            atomNameResidueRange CA 203-217 
+        }
+    }
+}
+
+harmonic {
+    name bias_CV1_distance
+    colvars CV1_distance
+    centers $bias_CV1_distance_CENTER
+    forceConstant $bias_CV1_distance_K
+}
+
+colvar {
+    name CV2_distance
+    distance {
+        group1 {
+            psfSegID PROA PROA PROA PROA
+            atomNameResidueRange CA 126-138
+            atomNameResidueRange CA 154-158
+            atomNameResidueRange CA 182-193
+            atomNameResidueRange CA 203-217
+             }
+        group2 {
+            psfSegID PROB PROB PROB PROB
+            atomNameResidueRange CA 827-838
+            atomNameResidueRange CA 851-864
+            atomNameResidueRange CA 882-891
+            atomNameResidueRange CA 902-915
+            
+        }
+    }
+}
+
+harmonic {
+    name bias_CV2_distance
+    colvars CV2_distance
+    centers $bias_CV2_distance_CENTER
+    forceConstant $bias_CV2_distance_K
+}
+
+colvar {
+    name res_distance1
+	distance {
+		group1 {
+			psfSegID PROA
+			atomNameResidueRange CA 610-610
+			}
+		group2 {
+			psfSegID PROB
+			atomNameResidueRange CA 1307-1307
+			}
+		}
+	}
+
+harmonic {
+    name bias_res_distance1
+    colvars res_distance1
+    centers $bias_res_distance1_CENTER
+    forceConstant $bias_res_distance1_K
+}
+
+
+
+
+colvar {
+    name res_distance2
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 613-613
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1310-1310
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance2
+    colvars res_distance2
+    centers $bias_res_distance2_CENTER
+    forceConstant $bias_res_distance2_K
+}
+
+
+
+colvar {
+    name res_distance3
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 617-617
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1314-1314
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance3
+    colvars res_distance3
+    centers $bias_res_distance3_CENTER
+    forceConstant $bias_res_distance3_K
+}
+
+
+
+colvar {
+    name res_distance4
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 620-620
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1317-1317
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance4
+    colvars res_distance4
+    centers $bias_res_distance4_CENTER
+    forceConstant $bias_res_distance4_K
+}
+
+
+
+colvar {
+    name res_distance5
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 624-624
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1321-1321
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance5
+    colvars res_distance5
+    centers $bias_res_distance5_CENTER
+    forceConstant $bias_res_distance5_K
+}
+
+
+
+colvar {
+    name res_distance6
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 652-652
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1251-1251
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance6
+    colvars res_distance6
+    centers $bias_res_distance6_CENTER
+    forceConstant $bias_res_distance6_K
+}
+
+
+
+colvar {
+    name res_distance7
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 644-644
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1244-1244
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance7
+    colvars res_distance7
+    centers $bias_res_distance7_CENTER
+    forceConstant $bias_res_distance7_K
+}
+
+
+
+colvar {
+    name res_distance8
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 626-626
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1227-1227
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance8
+    colvars res_distance8
+    centers $bias_res_distance8_CENTER
+    forceConstant $bias_res_distance8_K
+}
+
+
+
+colvar {
+    name res_distance9
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 606-606
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1302-1302
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance9
+    colvars res_distance9
+    centers $bias_res_distance9_CENTER
+    forceConstant $bias_res_distance9_K
+}
+
+
+
+colvar {
+    name res_distance10
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 602-602
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1298-1298
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance10
+    colvars res_distance10
+    centers $bias_res_distance10_CENTER
+    forceConstant $bias_res_distance10_K
+}
+
+
+
+colvar {
+    name res_distance11
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 599-599
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1355-1355
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance11
+    colvars res_distance11
+    centers $bias_res_distance11_CENTER
+    forceConstant $bias_res_distance11_K
+}
+
+
+
+colvar {
+    name res_distance12
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 554-554
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1344-1344
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance12
+    colvars res_distance12
+    centers $bias_res_distance12_CENTER
+    forceConstant $bias_res_distance12_K
+}
+
+
+
+colvar {
+    name res_distance13
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 547-547
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 1320-1320
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance13
+    colvars res_distance13
+    centers $bias_res_distance13_CENTER
+    forceConstant $bias_res_distance13_K
+}
+
+
+
+colvar {
+    name res_distance14
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 175-175
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 875-875
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance14
+    colvars res_distance14
+    centers $bias_res_distance14_CENTER
+    forceConstant $bias_res_distance14_K
+}
+
+
+
+colvar {
+    name res_distance15
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 179-179
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 857-857
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance15
+    colvars res_distance15
+    centers $bias_res_distance15_CENTER
+    forceConstant $bias_res_distance15_K
+}
+
+
+
+colvar {
+    name res_distance16
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 151-151
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 850-850
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance16
+    colvars res_distance16
+    centers $bias_res_distance16_CENTER
+    forceConstant $bias_res_distance16_K
+}
+
+
+
+colvar {
+    name res_distance17
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 172-172
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 883-883
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance17
+    colvars res_distance17
+    centers $bias_res_distance17_CENTER
+    forceConstant $bias_res_distance17_K
+}
+
+
+
+colvar {
+    name res_distance18
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 177-177
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 848-848
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance18
+    colvars res_distance18
+    centers $bias_res_distance18_CENTER
+    forceConstant $bias_res_distance18_K
+}
+
+
+
+colvar {
+    name res_distance19
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 113-113
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 781-781
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance19
+    colvars res_distance19
+    centers $bias_res_distance19_CENTER
+    forceConstant $bias_res_distance19_K
+}
+
+
+
+colvar {
+    name res_distance20
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 81-81
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 809-809
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance20
+    colvars res_distance20
+    centers $bias_res_distance20_CENTER
+    forceConstant $bias_res_distance20_K
+}
+
+
+
+colvar {
+    name res_distance21
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 56-56
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 788-788
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance21
+    colvars res_distance21
+    centers $bias_res_distance21_CENTER
+    forceConstant $bias_res_distance21_K
+}
+
+
+
+colvar {
+    name res_distance22
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 57-57
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 791-791
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance22
+    colvars res_distance22
+    centers $bias_res_distance22_CENTER
+    forceConstant $bias_res_distance22_K
+}
+
+
+
+colvar {
+    name res_distance23
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 61-61
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 792-792
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance23
+    colvars res_distance23
+    centers $bias_res_distance23_CENTER
+    forceConstant $bias_res_distance23_K
+}
+
+
+
+colvar {
+    name res_distance24
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 90-90
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 755-755
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance24
+    colvars res_distance24
+    centers $bias_res_distance24_CENTER
+    forceConstant $bias_res_distance24_K
+}
+
+
+
+colvar {
+    name res_distance25
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 92-92
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 756-756
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance25
+    colvars res_distance25
+    centers $bias_res_distance25_CENTER
+    forceConstant $bias_res_distance25_K
+}
+
+
+
+colvar {
+    name res_distance26
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 93-93
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 759-759
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance26
+    colvars res_distance26
+    centers $bias_res_distance26_CENTER
+    forceConstant $bias_res_distance26_K
+}
+
+
+
+colvar {
+    name res_distance27
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 68-68
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 763-763
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance27
+    colvars res_distance27
+    centers $bias_res_distance27_CENTER
+    forceConstant $bias_res_distance27_K
+}
+
+
+
+colvar {
+    name res_distance28
+        distance {
+                group1 {
+                        psfSegID PROA 
+                        atomNameResidueRange CA 71-71
+                        }
+                group2 {
+                        psfSegID PROB
+                        atomNameResidueRange CA 767-767
+                        }
+                }
+        }
+
+harmonic {  
+    name bias_res_distance28
+    colvars res_distance28
+    centers $bias_res_distance28_CENTER
+    forceConstant $bias_res_distance28_K
+}
+
