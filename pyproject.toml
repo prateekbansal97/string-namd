@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "string-namd"
+version = "0.1.0"
+description = "A modular, class-based Python package to run the string method with swarm-of-trajectories in NAMD"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Your Name", email = "you@example.com" }
+]
+dependencies = [
+  "jinja2>=3.0",
+  "pyyaml>=5.4"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/yourusername/string-namd"
+"Bug Tracker" = "https://github.com/yourusername/string-namd/issues"
+
+[project.scripts]
+string-namd = "string_namd.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["string_namd"]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=6.0",
+  "flake8>=4.0",
+  "black>=22.3.0"
+]
