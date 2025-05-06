@@ -1,0 +1,36 @@
+# string_namd/templates/colvars.template
+# Jinja2 template for Colvars configuration in a swarm run
+# Context variables expected:
+#   iteration     – current iteration number (int)
+#   image_idx     – index of the image along the string (int)
+#   replica_idx   – index of the replica within the swarm (int)
+#   steps         – number of MD steps for this swarm (int)
+#   coords        – 3‑element list/tuple of x, y, z coordinates for this image
+
+# Trajectory and restart frequencies
+colvarsTrajFrequency 100
+colvarsRestartFrequency 1000
+
+# Define a three-dimensional collective variable centered at the initial image position
+colvar {
+    name          image_{{ image_idx }}_replica_{{ replica_idx }}
+    width         0.1
+    lowerBoundary -10.0
+    upperBoundary 10.0
+    dimension     3
+
+    centers       {{ coords[0] }} {{ coords[1] }} {{ coords[2] }}
+
+    outputAppliedForce on
+}
+
+# Restraint force to keep sampling around the center
+harmonic {
+    colvars        image_{{ image_idx }}_replica_{{ replica_idx }}
+    forceConstant  5.0        # kcal/mol·Å²
+    centers         {{ coords[0] }} {{ coords[1] }} {{ coords[2] }}
+}
+
+# Run for a fixed number of steps
+run {{ steps }}
+

@@ -1,0 +1,2 @@
+[console_scripts]
+string-namd = string_namd.cli:main

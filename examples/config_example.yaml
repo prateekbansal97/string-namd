@@ -1,0 +1,23 @@
+# examples/config_example.yaml
+
+# Number of images (conformations) along the string path
+num_images: 20
+
+# Number of swarm replicas to launch per image each iteration
+num_swarms: 20
+
+# Number of MD steps to run in each swarm sampling
+swarm_steps: 50
+
+# Total number of string‐method iterations to perform
+num_iterations: 300
+
+# NAMD executable (must be in your PATH or a full path)
+namd_executable: namd2
+
+# Directory where all output (logs, trajectories, coords) will be written
+output_dir: ./output
+
+# Directory containing your Jinja2 templates for NAMD and Colvars
+template_dir: ./string_namd/templates
+

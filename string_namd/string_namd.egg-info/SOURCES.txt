@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+string_namd/string_namd.egg-info/PKG-INFO
+string_namd/string_namd.egg-info/SOURCES.txt
+string_namd/string_namd.egg-info/dependency_links.txt
+string_namd/string_namd.egg-info/entry_points.txt
+string_namd/string_namd.egg-info/requires.txt
+string_namd/string_namd.egg-info/top_level.txt
+tests/test_config.py
+tests/test_io.py
+tests/test_namd_runner.py
+tests/test_optimizer.py

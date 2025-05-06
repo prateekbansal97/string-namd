@@ -1,0 +1,55 @@
+# string_namd/templates/namd.template
+# Jinja2 template for NAMD configuration (equilibration or production)
+# Context variables expected:
+#   iteration      – current iteration number (int)
+#   image_idx      – index of the image along the string (int)
+#   coords         – 3‑element list/tuple of x, y, z coordinates for this image
+
+# Input structure and topology
+structure            input.psf
+coordinates          input.pdb
+
+# Simulation parameters
+set temperature     300
+set timestep        2.0   ;# fs
+set numSteps        10000 ;# number of steps for equilibration
+
+# Output settings
+outputName          eq_iter{{ iteration }}_img{{ image_idx }}
+outputEnergies      1000
+outputPressure      1000
+outputTiming        10000
+
+# PME and nonbonded settings
+exclude             scaled1-4
+1-4scaling          1.0
+cutoff              12.0
+switching           on
+switchdist          10.0
+pairlistdist        14.0
+PME                 yes
+PMEGridSpacing      1.0
+
+# Integrator
+langevin            on
+langevinDamping     1.0
+langevinTemp        $temperature
+
+# Rigid bonds
+rigidBonds          all
+
+# Periodic boundary conditions
+cellBasisVector1    100.0 0.0   0.0
+cellBasisVector2    0.0   100.0 0.0
+cellBasisVector3    0.0   0.0   100.0
+cellOrigin          0.0   0.0   0.0
+
+# Initial minimization
+minimization        on
+minimizationSteps   1000
+
+# Equilibration run
+run ${numSteps}
+
+# End of configuration
+

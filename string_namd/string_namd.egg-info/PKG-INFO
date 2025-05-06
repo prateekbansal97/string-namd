@@ -1,0 +1,129 @@
+Metadata-Version: 2.1
+Name: string-namd
+Version: 0.1.0
+Summary: A modular, class-based Python package to run the string method with swarm-of-trajectories in NAMD
+Author-email: Your Name <you@example.com>
+Project-URL: Homepage, https://github.com/yourusername/string-namd
+Project-URL: Bug Tracker, https://github.com/yourusername/string-namd/issues
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Chemistry
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+
+# string-namd
+
+[![PyPI version](https://img.shields.io/pypi/v/string-namd)]()
+[![Python version](https://img.shields.io/pypi/pyversions/string-namd)]()
+[![License](https://img.shields.io/github/license/yourusername/string-namd)]()
+
+A modular, class-based Python package to run the string method with swarm-of-trajectories in NAMD. Designed for newcomers: configure via a single YAML/JSON file, render NAMD/Colvars templates automatically, dispatch equilibration and swarm jobs, and update the string iteratively.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Installation](#installation)
+- [Prerequisites](#prerequisites)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Example Configuration](#example-configuration)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Development](#development)
+- [License](#license)
+
+## Overview
+
+The string method with swarms is an advanced enhanced-sampling algorithm that iteratively refines a sequence of "images" (conformations) connecting two end states. Each image spawns a small swarm of trajectories to estimate local gradients, which are then used to update the string. This package:
+
+1. Loads user parameters from a YAML or JSON file.  
+2. Renders Colvars and NAMD configuration files via Jinja2 templates.  
+3. Launches equilibration and swarm jobs using the NAMD executable.  
+4. Collects swarm results and updates image positions.  
+5. Iterates until convergence or a specified number of iterations.
+
+## Features
+
+- **Configuration-driven**: one YAML/JSON file for all tunable parameters.  
+- **Template I/O**: automatic Jinja2 rendering of `colvars.template` and `namd.template`.  
+- **Class-based API**: `Config`, `NamdRunner`, and `StringOptimizer`.  
+- **Command-line interface**: `string-namd optimize --config path/to/config.yaml`.  
+- **PEP8-compliant**: follows snake_case naming, ≤88‑char lines, and Google‑style docstrings.  
+- **Unit-tested**: pytest suite for core modules.
+
+## Installation
+
+```bash
+# Clone the repo
+git clone https://github.com/yourusername/string-namd.git
+cd string-namd
+
+# (Optional) create a virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# Install dependencies and package
+pip install .
+```
+
+Or directly via PyPI:
+
+```
+pip install string-namd
+```
+
+## Prerequisites
+
+-   NAMD installed and accessible in your `PATH` (or specify full path in config).
+
+-    Jinja2 for template rendering.
+
+-    PyYAML for YAML parsing (or built‑in `json` for JSON configs).
+
+Dependencies are automatically installed via `pip install .`
+
+
+## Configuration
+
+Create a YAML or JSON file (e.g. `config.yaml`) with the following required keys:
+
+```yaml
+num_images:       20        # Number of images along the string
+num_swarms:       20        # Number of replicas per image
+swarm_steps:      50        # MD steps per swarm iteration
+num_iterations:   300       # Total string method iterations
+namd_executable:  namd2     # NAMD binary or full path
+output_dir:       ./output  # Directory for all logs and outputs
+template_dir:     ./string_namd/templates  # Path to templates folder
+```
+You may add other optional parameters as needed.
+
+## Usage
+Run the optimizer via CLI:
+```bash 
+string-namd optimize --config path/to/config.yaml
+```
+
+This will:
+
+1. Create `output_dir` if it doesn’t exist.
+
+2.    For each iteration:
+
+  -      Render and launch equilibration jobs for each image.
+
+-        Render and launch swarm jobs for each image.
+
+ -       Post-process swarm outputs to update image coordinates.
+
+3. Save updated coordinates and log files under `output_dir/iter{n}`.
+
+## Example Configuration
+
+An example `config_example.yaml` is provided in the `examples/` directory.
