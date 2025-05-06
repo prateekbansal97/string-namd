@@ -12,10 +12,6 @@ A modular, class-based Python package to run the string method with swarm-of-tra
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Example Configuration](#example-configuration)
-- [Project Structure](#project-structure)
-- [Testing](#testing)
-- [Development](#development)
-- [License](#license)
 
 ## Overview
 
@@ -95,11 +91,9 @@ This will:
 
 2.    For each iteration:
 
-  -      Render and launch equilibration jobs for each image.
-
--        Render and launch swarm jobs for each image.
-
- -       Post-process swarm outputs to update image coordinates.
+- Render and launch equilibration jobs for each image.
+- Render and launch swarm jobs for each image.
+- Post-process swarm outputs to update image coordinates.
 
 3. Save updated coordinates and log files under `output_dir/iter{n}`.
 
